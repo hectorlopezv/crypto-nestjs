@@ -15,4 +15,16 @@ export class UserRepository {
   async findOneByEmail(email: string): Promise<User> {
     return await this.user.findOne({ email });
   }
+  async getAllUsers(): Promise<User[]> {
+    return await this.user.find();
+  }
+
+  async findOneById(id: string): Promise<User> {
+    console.log('id', id);
+    return await this.user.findById({ _id: id });
+  }
+
+  async updateOne(userId: string, data: Partial<User>): Promise<User> {
+    return this.user.findByIdAndUpdate(userId, data, { new: true });
+  }
 }

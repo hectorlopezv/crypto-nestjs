@@ -1,21 +1,11 @@
+version: '3.1'
+
 services:
-  orders:
-    build:
-      context: .
-      dockerfile: ./apps/orders/Dockerfile
-      target: development
-    command: npm run start:dev orders
-    env_file:
-      - ./apps/orders/.env
-    depends_on:
-      - mongodb-primary
-      - mongodb-secondary
-      - mongodb-arbiter
-      - billing
-      - auth
-      - rabbitmq
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+  mongo:
+    image: mongo
     ports:
-      - '3000:3000'
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: crypto

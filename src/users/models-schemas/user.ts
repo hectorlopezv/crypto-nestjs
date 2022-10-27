@@ -1,12 +1,17 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { CoinbaseAuth } from './coinbase';
 
 @Schema({ versionKey: false })
 export class User extends Document {
   @Prop()
   email: string;
+
   @Prop()
   password: string;
+
+  @Prop()
+  coinbaseAuth?: CoinbaseAuth;
 }
 
-export const UsersSchema = SchemaFactory.createForClass(User);
+export const UserSchema = SchemaFactory.createForClass(User);
